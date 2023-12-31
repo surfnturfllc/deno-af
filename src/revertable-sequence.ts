@@ -1,10 +1,10 @@
 /// <reference types="./types.d.ts" />
 
 
-export class Processor {
-  steps: Action[];
+export class RevertableSequence {
+  steps: RevertableAction[];
 
-  constructor(steps: Action[]) {
+  constructor(steps: RevertableAction[]) {
     this.steps = steps;
   }
 

@@ -5,7 +5,7 @@ import { assertExists } from "https://deno.land/std@0.210.0/assert/mod.ts";
 
 import sinon from "npm:sinon";
 
-import { Processor } from "./processor.ts";
+import { RevertableSequence } from "./revertable-sequence.ts";
 
 
 function createMockAction() {
@@ -23,9 +23,9 @@ function createMockErrorAction() {
 }
 
 
-describe("Processor", () => {
+describe("RevertableSequence", () => {
   it("can be instantiated", () => {
-    const processor = new Processor([]);
+    const processor = new RevertableSequence([]);
     assertExists(processor);
   });
 
@@ -34,7 +34,7 @@ describe("Processor", () => {
     const action2 = createMockAction();
     const action3 = createMockAction();
 
-    const processor = new Processor([action1, action2, action3]);
+    const processor = new RevertableSequence([action1, action2, action3]);
     await processor.process();
 
     sinon.assert.callOrder(action1.process, action2.process, action3.process);
@@ -45,7 +45,7 @@ describe("Processor", () => {
     const action2 = createMockAction();
     const action3 = createMockErrorAction();
 
-    const processor = new Processor([action1, action2, action3]);
+    const processor = new RevertableSequence([action1, action2, action3]);
     await processor.process();
 
     sinon.assert.callOrder(
