@@ -9,6 +9,12 @@ export class RevertableSequence {
   }
 
   async process() {
+    for await (const _ of this) {
+      // do nothing
+    }
+  }
+  
+  async *[Symbol.asyncIterator]() {
     if (this.steps.length === 0) {
       return;
     }
@@ -42,6 +48,8 @@ export class RevertableSequence {
         if (this.steps.length > count) {
           queue.push(this.steps[count]);
         }
+
+        yield { done: queue.length < 1, value: true };
       }
     }
   }
