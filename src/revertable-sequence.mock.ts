@@ -4,8 +4,8 @@ import sinon from "npm:sinon";
 export class MockRevertableSequence {
   steps: RevertableAction[];
 
-  constructor(steps: RevertableAction[]) {
-    this.steps = steps;
+  constructor() {
+    this.steps = [];
   }
 
   process = sinon.stub().resolves();
