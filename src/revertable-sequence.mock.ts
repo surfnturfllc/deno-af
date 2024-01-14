@@ -11,7 +11,7 @@ export class MockRevertableSequence {
   }
 
   process = sinon.stub().callsFake(async () => {
-    for (const step of this) {
+    for await (const step of this) {
       // do nothing
     }
   });
